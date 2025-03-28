@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocktail Recipe Generator</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍸 Cocktail Recipe Generator</h1>
+            
+            <form action="/search" method="POST" class="search-form">
+                <input type="text" name="cocktailName" placeholder="Search for a cocktail" required>
+                <button type="submit">Search</button>
+            </form>
+        </header>
+
+        <main>
+            <% if (locals.searchResults) { %>
+                <div class="search-results">
+                    <h2>Search Results</h2>
+                    <div class="cocktail-grid">
+                        <% searchResults.forEach(result => { %>
+                            <div class="cocktail-card">
+                                <img src="<%= result.strDrinkThumb %>" alt="<%= result.strDrink %>">
+                                <h3><%= result.strDrink %></h3>
+                                <a href="/cocktail/<%= result.idDrink %>" class="btn">View Recipe</a>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+            <% } %>
+
+            <div class="featured-cocktail">
+                <h2>Random Cocktail</h2>
+                <div class="cocktail-details">
+                    <img src="<%= cocktail.strDrinkThumb %>" alt="<%= cocktail.strDrink %>" class="cocktail-image">
+                    <div class="cocktail-info">
+                        <h3><%= cocktail.strDrink %></h3>
+                        <p><strong>Category:</strong> <%= cocktail.strCategory %></p>
+                        <p><strong>Glass:</strong> <%= cocktail.strGlass %></p>
+                        <a href="/cocktail/<%= cocktail.idDrink %>" class="btn">View Full Recipe</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

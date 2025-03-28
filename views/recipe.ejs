@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= cocktail.strDrink %> Recipe</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍸 <%= cocktail.strDrink %></h1>
+            <a href="/" class="btn">Back to Home</a>
+        </header>
+
+        <main class="recipe-details">
+            <div class="recipe-grid">
+                <div class="recipe-image">
+                    <img src="<%= cocktail.strDrinkThumb %>" alt="<%= cocktail.strDrink %>">
+                </div>
+                
+                <div class="recipe-info">
+                    <h2>Recipe Details</h2>
+                    <p><strong>Category:</strong> <%= cocktail.strCategory %></p>
+                    <p><strong>Glass:</strong> <%= cocktail.strGlass %></p>
+                    <p><strong>Type:</strong> <%= cocktail.strAlcoholic %></p>
+
+                    <h3>Ingredients</h3>
+                    <ul>
+                        <% 
+                        for (let i = 1; i <= 15; i++) {
+                            const ingredient = cocktail[`strIngredient${i}`];
+                            const measure = cocktail[`strMeasure${i}`];
+                            if (ingredient && ingredient.trim() !== '') {
+                        %>
+                            <li><%= measure ? measure : '' %> <%= ingredient %></li>
+                        <% 
+                            } 
+                        } 
+                        %>
+                    </ul>
+
+                    <h3>Instructions</h3>
+                    <p><%= cocktail.strInstructions %></p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
